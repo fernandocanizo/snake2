@@ -47,6 +47,11 @@ const game = (canvas, ctx) => {
     playerY = 0;
   }
 
+  canvas.width = Math.max(document.documentElement.clientWidth ||
+    0, window.innerWidth || 0);
+  canvas.height = Math.max(document.documentElement.clientHeight ||
+    0, window.innerHeight || 0);
+
   // paint background
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
