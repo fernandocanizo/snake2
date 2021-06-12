@@ -1,0 +1,22 @@
+{
+  "name": "snake",
+  "version": "1.0.0",
+  "description": "",
+  "main": "snake.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "snake"
+  ],
+  "author": "edward.moreno@ing.uchile.cl",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.28.0"
+  },
+  "dependencies": {
+    "socket.io": "^4.1.2"
+  }
+}
