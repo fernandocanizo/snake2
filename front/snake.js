@@ -26,6 +26,7 @@ const getRandomPosition = () => {
 
 const Board = () => {
   const ctx = state.ctx;
+
   const draw = () => {
     ctx.beginPath();
     ctx.fillStyle = 'black';
@@ -33,7 +34,27 @@ const Board = () => {
     ctx.fill();
   };
 
-  return { draw };
+  const drawGrid = () => {
+    ctx.beginPath();
+    ctx.strokeStyle = 'white';
+
+    // vertical lines
+    for (let dx = 0; dx <= ctx.canvas.width; dx += gameGlobals.squareSize) {
+      ctx.moveTo(dx, 0);
+      ctx.lineTo(dx, ctx.canvas.height);
+    }
+
+    // horizontal lines
+    for (let dy = 0; dy <= ctx.canvas.height; dy += gameGlobals.squareSize) {
+      ctx.moveTo(0, dy);
+      ctx.lineTo(ctx.canvas.width, dy);
+    }
+
+    ctx.stroke();
+    ctx.fill();
+  }
+
+  return { draw, drawGrid };
 };
 
 const Food = ({
@@ -141,6 +162,8 @@ const game = () => {
   }
 
   board.draw();
+  board.drawGrid();
+
   food.forEach(f => f.draw());
   snake.update();
   snake.draw();
@@ -173,5 +196,3 @@ window.onload = () => {
   document.addEventListener('keydown', keyPush);
   setInterval(() => game(), gameGlobals.fps);
 };
-
-
