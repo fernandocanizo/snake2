@@ -170,7 +170,8 @@ const game = () => {
 };
 
 const keyPush = e => {
-  const snake = state.snake;
+  const { snake , interval } = state;
+
   const key = e.key;
   if (key === 'ArrowLeft') {
     snake.turnLeft();
@@ -180,6 +181,24 @@ const keyPush = e => {
     snake.turnRight();
   } else if (key === 'ArrowDown') {
     snake.turnDown();
+  }
+
+  // interval controls
+  if (key === 'i') {
+    clearInterval(interval);
+    gameGlobals.fps /= 2;
+    state.interval = setInterval(() => game(), gameGlobals.fps);
+  } else if (key === 'd') {
+    clearInterval(interval);
+    gameGlobals.fps *= 2;
+    state.interval = setInterval(() => game(), gameGlobals.fps);
+  } else if (key === 'p') {
+    if (interval) {
+      clearInterval(interval);
+      state.interval = undefined;
+    } else {
+      state.interval = setInterval(() => game(), gameGlobals.fps);
+    }
   }
 };
 
@@ -194,5 +213,5 @@ window.onload = () => {
   state.food = [Food({pos: getRandomPosition()})];
 
   document.addEventListener('keydown', keyPush);
-  setInterval(() => game(), gameGlobals.fps);
+  state.interval = setInterval(() => game(), gameGlobals.fps);
 };
